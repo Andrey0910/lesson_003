@@ -30,6 +30,14 @@ $file = "./csvData.csv";
 echo "<p>", task3($file), "</p>";
 echo "</div>";
 // конец вывода третьего задания
+// начало вывода четвертое задания
+echo "<div class='jumbotron'>";
+echo "<h5>", "Задание 4", "</h5>";
+$url = "https://en.wikipedia.org/w/api.php?action=query&titles=Main%20Page&prop=revisions&rvprop=content&format=json";
+$params = ["title", "pageid"];
+echo "<p>", task4($url, $params), "</p>";
+echo "</div>";
+// конец вывода четвертое задания
 //Возвращает содержимое буфера вывода
 $content = ob_get_contents();
 //Очищаем и отключаем буферизацию вывода

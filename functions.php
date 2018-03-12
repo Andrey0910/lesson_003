@@ -103,26 +103,34 @@ function compare($file1, $file2)
         }
     }
 }
-function task3($file){
+
+function task3($file)
+{
     $arr = createArr();
     writeCsv($file, $arr);
     $res = readCsv($file);
     $sum = sumEven($res);
-    echo "<br>", "Сумма четных чисел равна: ".$sum;
+    echo "<br>", "Сумма четных чисел равна: " . $sum;
 }
-function createArr(){
+
+function createArr()
+{
     $arr = [];
-    for ($i = 0; $i < 50; $i++){
+    for ($i = 0; $i < 50; $i++) {
         $arr[$i] = rand(1, 100);
     }
     return $arr;
 }
-function writeCsv($file, $arr){
+
+function writeCsv($file, $arr)
+{
     $fp = fopen($file, "w");
     fputcsv($fp, $arr);
     fclose($fp);
 }
-function readCsv($file){
+
+function readCsv($file)
+{
     $csvFile = fopen($file, "r");
     if ($csvFile) {
         $res = [];
@@ -132,14 +140,32 @@ function readCsv($file){
         return $res;
     }
 }
-function sumEven($arr){
+
+function sumEven($arr)
+{
     $sum = 0;
-    foreach ($arr as $item){
+    foreach ($arr as $item) {
         foreach ($item as $value) {
             if (is_numeric($value)) {
-                ($value % 2 == 0 ) ? $sum += $value : null;
+                ($value % 2 == 0) ? $sum += $value : null;
             }
         }
     }
     return $sum;
+}
+
+function task4($url, $params)
+{    // 1. С помощью PHP запросить данные по адресу:
+    $content = file_get_contents($url);
+    if (empty($content)) {
+        return null;
+    }
+    $json = json_decode($content, true);
+    if (empty($json["query"]["pages"])) {
+        return null;
+    }    // 2. Вывести title и page_id
+    $result = array_shift($json["query"]["pages"]);
+    foreach ($params as $value) {
+        echo "<br>", $value . " = " . $result[$value];
+    }
 }
